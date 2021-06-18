@@ -1,10 +1,15 @@
 import 'babel-polyfill';
 
-import st from './st';
+// import st from './st';
 import server from './server';
 import {noop} from '../public/util';
 import getOptions from '../public/default-options';
 import client from './client';
+import Widget from "../public/widget";
+import draggable from "./st/draggable";
+import bindStorage from "./st/storage";
+import bindGA from "./st/ga";
+import hideOnEsc from "./st/hide-on-esc";
 
 const MOUSE_UP = 'mouseup'
   , selection = getSelection();
@@ -15,7 +20,7 @@ const MOUSE_UP = 'mouseup'
  */
 export async function firstMouseUp( e ) {
   if ( selection.toString().trim() ) {
-    removeFirstMouseUp();
+    // removeFirstMouseUp();
 
     if ( 'true' === document.body.contentEditable ) {
       client.send( 'ga' , [ 'send' , 'event' , 'body 可编辑的情况' ] );
@@ -26,6 +31,12 @@ export async function firstMouseUp( e ) {
         return;
       }
     }
+    let st = new Widget( { client } );
+
+    draggable( st );
+    bindStorage( st );
+    bindGA( st );
+    hideOnEsc( st );
 
     st.$appendTo( 'body' );
     st.$emit( 'mouseup' , e );
@@ -42,7 +53,7 @@ export function removeFirstMouseUp() {
 }
 
 export function onTranslate() {
-  removeFirstMouseUp();
+  // removeFirstMouseUp();
   st.$appendTo( 'body' );
   server.removeListener( 'connect' , onConnect );
 }

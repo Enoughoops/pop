@@ -71,7 +71,7 @@ $baseFontHoverColor: #9a6a16;
 
   // 翻译窗口的样式
   > .__st-box__ {
-    width: 250px;
+    width: 600px;
     background-color: $baseBackgroundColor;
     border: 1px solid $baseBackgroundColor;
 
@@ -207,6 +207,10 @@ $baseFontHoverColor: #9a6a16;
       padding: 10px;
       background-color: $baseFontColor;
 
+      iframe {
+        width: 100%;
+        //height: 100%;
+      }
       .__phonetic__ {
         margin-bottom: 10px;
 

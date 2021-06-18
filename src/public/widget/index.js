@@ -10,7 +10,7 @@ import chromeCall from 'chrome-call';
 
 import locales from '../locales';
 import template from './template.html';
-// const request = require('superagent');
+const request = require('superagent');
 
 // 去掉 locales 里的 *-* 类语种，除了 zh-CN、zh-TW 和 zh-HK（百度翻译里的粤语）
 const translateLocales = [];
@@ -33,6 +33,8 @@ const resolvedEmptyPromise = Promise.resolve() ,
 export default Vue.extend( {
   template ,
   data : ()=>({
+    rawHtml: '',
+    frameSrc: '',
     access_token: '', // 扇贝单词授权 token
     locales : translateLocales ,
     showForm : false ,
@@ -48,7 +50,7 @@ export default Vue.extend( {
       dict : [] ,
       result : [] ,
       link : ''
-    }
+    },
   }) ,
   created() {
     this.$options.client.on( 'disconnect' , ()=> {
@@ -56,7 +58,12 @@ export default Vue.extend( {
         error : '连接到翻译引擎时发生了错误，请刷新网页或重启浏览器后再试。'
       }
     } );
+    // this.load("https://www.baidu.com");
   } ,
+
+  mounted() {
+    // this.load("https://www.baidu.com");
+  },
   computed : {
     apiName() {
       return {
@@ -68,6 +75,24 @@ export default Vue.extend( {
     }
   },
   methods : {
+
+    // load (url) {
+    //
+    //
+    //     let param = {
+    //       accept: 'text/html, text/plain'
+    //     }
+    //     console.log('--------loading-----');
+    //     request.get(url).query(param).end((err, response) => {
+    //       console.log('--------raw-----'+response.text);
+    //       console.log('--------error-----'+err);
+    //
+    //       // 处理HTML显示
+    //       this.rawHtml = response.text;
+    //     })
+    //
+    // },
+
 
     /**
      * 翻译快捷键：Ctrl + Enter
@@ -139,6 +164,10 @@ export default Vue.extend( {
     openOptions() {
       this.$options.client.send( 'open options' );
     } ,
+
+    closeFrame() {
+      this.boxPos.show = false;
+    },
 
     /**
      * 复制文本

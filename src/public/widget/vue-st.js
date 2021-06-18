@@ -153,6 +153,7 @@ export default {
       if ( $btn.contains( target ) ) {
         e.preventDefault(); // 点击翻译按钮时防止划选的文本消失掉
         this.query.text = getText();
+        this.frameSrc = getText();
         this.translate();
       } else if ( !(this.loading || $box.contains( target ) || this.pinned || this.inline) ) {
         this.boxPos.show = false;

@@ -2,7 +2,7 @@
   <st-div class="__st-box__" v-el:st-box :style="boxStyle">
     <st-header v-if="!inline" v-el:st-drag>
       <st-span class="st-icon-pin" title="固定" @click="pinned=!pinned" :class="{'__pinned__':pinned}"></st-span>
-      <st-span class="st-icon-down-open" :class="{'__open__':showForm}" :title="showForm?'收起':'展开'" @click="showForm=!showForm"></st-span>
+      <st-span class="st-icon-down-open" :class="{'__open__':showForm}" :title="showForm?'收起':'展开'" @click="closeFrame"></st-span>
       <st-span class="st-icon-cog" title="设置" @click="openOptions"></st-span>
     </st-header>
     <st-div class="__query-form__" v-show="showForm">
@@ -44,8 +44,10 @@
     <st-div class="__translate-result__" v-show="loading">正在查询，请稍候……</st-div>
     <st-div class="__translate-result__" v-show="showResult && !loading">
       <st-div v-show="result.error">
-        <st-span v-text="result.error"></st-span>
-        <st-span class="__retry__" @click="safeTranslate">重试</st-span>
+        <iframe  :src="frameSrc" v-el:st-frame></iframe>
+<!--        <st-span v-html="rawHtml"></st-span>-->
+        <!--        <st-span v-text="result.error"></st-span>-->
+<!--        <st-span class="__retry__" @click="safeTranslate">重试</st-span>-->
       </st-div>
       <st-div v-else>
         <st-div class="__phonetic__">
@@ -72,12 +74,12 @@
         </st-div>
       </st-div>
     </st-div>
-    <st-footer>
-      <!-- TODO: 功能未测试，先暂时注释掉 -->
-      <!-- <st-span v-show="showShanbay && !loading && result"><a @click="addWord(query.text, $event)">添加至扇贝单词本</a></st-span> -->
-      <st-span v-show="!loading && apiName">via
-        <a :href="result.link" target="_blank" v-text="apiName"></a></st-span>
-    </st-footer>
+<!--    <st-footer>-->
+<!--      &lt;!&ndash; TODO: 功能未测试，先暂时注释掉 &ndash;&gt;-->
+<!--      &lt;!&ndash; <st-span v-show="showShanbay && !loading && result"><a @click="addWord(query.text, $event)">添加至扇贝单词本</a></st-span> &ndash;&gt;-->
+<!--      <st-span v-show="!loading && apiName">via-->
+<!--        <a :href="result.link" target="_blank" v-text="apiName"></a></st-span>-->
+<!--    </st-footer>-->
   </st-div>
   <st-div class="__st-btn__" v-el:st-btn :style="btnStyle">译</st-div>
 </st-div>
