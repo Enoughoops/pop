@@ -6,17 +6,19 @@ import chromeCall from 'chrome-call';
 import {send} from 'connect.io';
 import {getCurrentTabId} from '../public/util';
 import watcher from '../public/storage-watcher';
+import {onTranslate} from '../content-scripts/index'
 
 const callContextMenus = chromeCall.scope( chrome.contextMenus );
 
 export let created = false;
 
-export async function onContextMenusClicked() {
-  send( {
-    id : await getCurrentTabId() ,
-    name : 'translate'
-  } );
-}
+// export async function onContextMenusClicked(info) {
+//   send( {
+//     id : await getCurrentTabId() ,
+//     name : 'translate',
+//     data : info.linkUrl
+//   } );
+// }
 
 export function onChromeLocalStorageChanged( items ) {
   if ( items.showMenu ) {
@@ -29,7 +31,7 @@ export function onChromeLocalStorageChanged( items ) {
 /* istanbul ignore if */
 if ( process.env.NODE_ENV !== 'testing' ) {
   watcher( 'showMenu' , onChromeLocalStorageChanged );
-  chrome.contextMenus.onClicked.addListener( onContextMenusClicked );
+  // chrome.contextMenus.onClicked.addListener( onContextMenusClicked );
 }
 
 /**
@@ -42,8 +44,19 @@ function createMenus() {
     return callContextMenus( 'create' , {
       id : 'menu-translate' ,
       title : '翻译“%s”' ,
-      contexts : [ 'selection' ] ,
-      documentUrlPatterns : [ 'http://*/*' , 'https://*/*' , 'file:///*' , 'about:blank' ] // 不要让菜单出现在 chrome-* 页面下
+      contexts : [ 'all'] ,
+      documentUrlPatterns : [ 'http://*/*' , 'https://*/*' , 'file:///*' , 'about:blank' ], // 不要让菜单出现在 chrome-* 页面下
+      onclick:  async function(params){
+        console.log("Select ::::::::"+params.linkUrl);
+        // onTranslate(params.linkUrl)
+        {
+          send( {
+            id :  await getCurrentTabId() ,
+            name : 'translate',
+            data : params.linkUrl
+          } );
+        }
+      },
     } );
   }
 }

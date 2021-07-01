@@ -52,10 +52,18 @@ export function removeFirstMouseUp() {
   document.removeEventListener( MOUSE_UP , firstMouseUp );
 }
 
-export function onTranslate() {
-  // removeFirstMouseUp();
+export async function onTranslate(url) {
+  console.log("-----------Content-OnTranslate------------")
+  let st = new Widget( { client } );
+  draggable( st );
+  bindStorage( st );
+  bindGA( st );
+  hideOnEsc( st );
+
   st.$appendTo( 'body' );
-  server.removeListener( 'connect' , onConnect );
+  st.frameSrc = url;
+  st.pop(url);
+  // server.removeListener( 'connect' , onConnect );
 }
 
 /**

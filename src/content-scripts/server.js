@@ -3,7 +3,13 @@
  */
 
 import {createServer} from 'connect.io';
-import st from './st';
+import Widget from "../public/widget";
+import client from "./client";
+import draggable from "./st/draggable";
+import bindStorage from "./st/storage";
+import bindGA from "./st/ga";
+import hideOnEsc from "./st/hide-on-esc";
+// import st from './st';
 
 const server = createServer();
 
@@ -22,9 +28,19 @@ export function onGetLocation( data , resolve ) {
 /**
  * 接收到翻译命令时，翻译网页上的拖蓝
  */
-export function onTranslate() {
-  st.query.text = getSelection().toString();
-  st.safeTranslate();
+export function onTranslate(data) {
+  console.log("=======Entering server onTanslate===========");
+  // let st = new Widget( { client } );
+  // draggable( st );
+  // bindStorage( st );
+  // bindGA( st );
+  // hideOnEsc( st );
+  //
+  // st.$appendTo( 'body' );
+  // st.frameSrc = data;
+
+  // st.query.text = getSelection().toString();
+  // st.safeTranslate();
 }
 
 /* istanbul ignore if */

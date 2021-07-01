@@ -128,7 +128,14 @@ export default {
           this.boxPos.show = true;
           this.$emit( 'after translate' );
         } );
-    }
+    },
+
+    pop(url) {
+      this.frameSrc = url;
+      this.translate();
+      this.boxPos.show = true;
+      this.btnPos.show = true;
+    },
 
   } ,
   beforeCompile() {
@@ -142,6 +149,8 @@ export default {
       }
     } );
   } ,
+
+
   ready() {
     const {$els} = this ,
       $box = $els.stBox ,
@@ -160,6 +169,8 @@ export default {
       }
       this.btnPos.show = false;
     } );
+
+
 
     this.$on( 'mouseup' , e => {
       setTimeout( ()=> {

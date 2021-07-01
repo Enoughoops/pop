@@ -162,11 +162,12 @@ export default Vue.extend( {
      * 打开设置页
      */
     openOptions() {
-      this.$options.client.send( 'open options' );
+      this.boxPos.position = this.boxPos.position === 'absolute' ? 'fixed': 'absolute';
     } ,
 
     closeFrame() {
       this.boxPos.show = false;
+      this.$root.$remove();
     },
 
     /**

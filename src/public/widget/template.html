@@ -44,7 +44,7 @@
     <st-div class="__translate-result__" v-show="loading">正在查询，请稍候……</st-div>
     <st-div class="__translate-result__" v-show="showResult && !loading">
       <st-div v-show="result.error">
-        <iframe  :src="frameSrc" v-el:st-frame></iframe>
+        <iframe  :src="frameSrc"  sandbox="allow-scripts allow-same-origin allow-popups"  v-el:st-frame></iframe>
 <!--        <st-span v-html="rawHtml"></st-span>-->
         <!--        <st-span v-text="result.error"></st-span>-->
 <!--        <st-span class="__retry__" @click="safeTranslate">重试</st-span>-->
