@@ -45,7 +45,7 @@ export default function ( st ) {
           // frame.style.width  = event.rect.width + 'px';
           frame.style.height = event.rect.height + 'px';
           box.style.width = event.rect.width + 'px';
-          box.style.height = event.rect.height+ 72 + 'px';
+          box.style.height = event.rect.height+ 67 + 'px';
         });
 
     interact( st.$els.stDrag )

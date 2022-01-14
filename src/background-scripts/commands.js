@@ -36,36 +36,36 @@ export async function onCommand( command ) {
  // });
 
 // 每次请求前触发，可以拿到 requestBody 数据，同时可以对本次请求作出干预修改
-    webRequest.onBeforeRequest.addListener(details =>{
-        console.log('onBeforeRequest', details);
-        const url = details.url;
-        chrome.cookies.getAll({url}, cookies => {
-            console.log(cookies);
-            cookies.map((cookie) => {
-                if (cookie.secure === false) {
-                    cookie.secure = true;
-                }
-                if (cookie.sameSite !== 'None') {
-                    cookie.sameSite = 'no_restriction';
-                }
-                return cookie;
-            });
-            console.log(cookies);
-            cookies.forEach((each) => {
-                delete each.hostOnly;
-                delete each.session;
-                chrome.cookies.remove({url, name: each.name}, details => {});
-                chrome.cookies.set({url, ... each});
-                if (each.name === 'lastvisit') {
-                    each.name = 'guestJs';
-                    chrome.cookies.set({url, ... each});
-                }
-            });
-            chrome.cookies.getAll({url}, cookies => {
-                console.log('New Cookies:'+cookies);
-            })
-        });
-    }, {urls:['<all_urls>']},['blocking','extraHeaders','requestBody']);
+//     webRequest.onBeforeRequest.addListener(details =>{
+//         console.log('onBeforeRequest', details);
+//         const url = details.url;
+//         chrome.cookies.getAll({url}, cookies => {
+//             console.log(cookies);
+//             cookies.map((cookie) => {
+//                 if (cookie.secure === false) {
+//                     cookie.secure = true;
+//                 }
+//                 if (cookie.sameSite !== 'None') {
+//                     cookie.sameSite = 'no_restriction';
+//                 }
+//                 return cookie;
+//             });
+//             console.log(cookies);
+//             cookies.forEach((each) => {
+//                 delete each.hostOnly;
+//                 delete each.session;
+//                 chrome.cookies.remove({url, name: each.name}, details => {});
+//                 chrome.cookies.set({url, ... each});
+//                 if (each.name === 'lastvisit') {
+//                     each.name = 'guestJs';
+//                     chrome.cookies.set({url, ... each});
+//                 }
+//             });
+//             chrome.cookies.getAll({url}, cookies => {
+//                 console.log('New Cookies:'+cookies);
+//             })
+//         });
+//     }, {urls:['<all_urls>']},['blocking','extraHeaders','requestBody']);
 
 webRequest.onBeforeSendHeaders.addListener(details =>{
         let newHeaderList = details.requestHeaders.map(

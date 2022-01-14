@@ -1,5 +1,6 @@
 <st-div id="__selection-translator__">
-  <st-div class="__st-box__" v-el:st-box :style="boxStyle">
+  <st-div class="__st-box__" v-el:st-box :style="boxStyle" style="box-shadow: rgb(29 17 51 / 4%) 0px 16px 24px 2px, rgb(9 32 77 / 12%) 0px 6px 32px 4px, rgb(29 17 51 / 12%) 0px 8px 12px -5px"
+">
     <st-header v-if="!inline" v-el:st-drag>
       <st-span class="st-icon-pin" title="固定" @click="pinned=!pinned" :class="{'__pinned__':pinned}"></st-span>
       <st-span class="st-icon-down-open" :class="{'__open__':showForm}" :title="showForm?'收起':'展开'" @click="closeFrame"></st-span>
@@ -44,7 +45,7 @@
     <st-div class="__translate-result__" v-show="loading">正在查询，请稍候……</st-div>
     <st-div class="__translate-result__" v-show="showResult && !loading">
       <st-div v-show="result.error">
-        <iframe  :src="frameSrc"  sandbox="allow-scripts allow-same-origin allow-popups"  v-el:st-frame></iframe>
+        <iframe  :src="frameSrc"   v-el:st-frame></iframe>
 <!--        <st-span v-html="rawHtml"></st-span>-->
         <!--        <st-span v-text="result.error"></st-span>-->
 <!--        <st-span class="__retry__" @click="safeTranslate">重试</st-span>-->

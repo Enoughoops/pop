@@ -79,7 +79,7 @@ export default {
         zIndex : boxPos.zIndex ,
         left : 0 ,
         top : 0 ,
-        transform : `translateX(${boxPos.translateX}px) translateY(${boxPos.translateY}px)`
+        transform : `translateX(${boxPos.translateX}px) translateY(${boxPos.translateY}px)`,
       };
     } ,
 

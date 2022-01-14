@@ -72,8 +72,9 @@ $baseFontHoverColor: #9a6a16;
   // 翻译窗口的样式
   > .__st-box__ {
     width: 600px;
-    background-color: $baseBackgroundColor;
-    border: 1px solid $baseBackgroundColor;
+    border-color: white;
+    background-color: grey;
+    border-radius: 18px;
 
     .__action-list__, select, textarea {
       border: 0;
@@ -93,7 +94,7 @@ $baseFontHoverColor: #9a6a16;
     > st-header {
       @extend %clear-fix;
       cursor: move;
-      padding: 8px 0;
+      padding: 4px 0px 4px 0px;
 
       .st-icon-pin::before, .st-icon-down-open::before {
         transform: translateY(0) rotate(0deg);
@@ -204,11 +205,13 @@ $baseFontHoverColor: #9a6a16;
     // 翻译结果
     > .__translate-result__ {
       color: #000;
-      padding: 10px;
+      border-radius: 18px;
+      padding: 14px;
       background-color: $baseFontColor;
 
       iframe {
         width: 100%;
+        border-radius: 18px;
         //height: 100%;
       }
       .__phonetic__ {
